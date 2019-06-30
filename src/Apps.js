@@ -1,5 +1,5 @@
 import React from "react";
-import MainRouter from "./MainRouter";
+import MainRouter from "./router/MainRouter";
 import { BrowserRouter } from "react-router-dom";
 
 const Apps = () => (

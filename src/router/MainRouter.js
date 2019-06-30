@@ -1,8 +1,8 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import Home from "./core/Home";
-import Upload from "./Upload";
-import Menu from "./core/Menu";
+import Home from "../core/Home";
+import Upload from "../Component/Upload";
+import Menu from "../core/Menu";
 
 // import Test from "./user/test.tsx";
 

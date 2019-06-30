@@ -1,13 +1,13 @@
 import React from "react";
 /* import App from "../App"; */
-import Test from "../Test";
+import Grid from "../Component/Grid";
 const Home = () => (
   <div>
-    <div className="jumbotron">
+    <div className="jumbotron text-center">
       <h2>Welcome to Visualyser</h2>
     </div>
 
-    <Test />
+    <Grid />
   </div>
 );
 

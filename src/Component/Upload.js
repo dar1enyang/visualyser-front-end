@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import RecordDataService from "./api/RecordDataService";
+import RecordDataService from "../api/RecordDataService";
 
 import CsvParse from "@vtex/react-csv-parse";
 
