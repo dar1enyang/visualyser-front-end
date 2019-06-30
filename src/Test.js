@@ -77,27 +77,57 @@ class Test extends Component {
   loadRecords() {
     RecordDataService.retrieveAllRecords().then(response => {
       let array = [];
+      let survived = {};
+      let survivedPclass = {};
+      let notSurvivedPclass = {};
       for (let i = 0; i < response.data.length; i++) {
         array.push(Object.values(response.data[i]));
       }
+      for (let i = 0; i < array.length; i++) {
+        if (array[i][1] === "1") {
+          if (!survived[1]) {
+            survived[1] = [];
+          }
+          survived[1].push(array[i]);
 
+          for (let j = 1; j <= 3; j++) {
+            if (array[i][2] === j.toString()) {
+              if (!survivedPclass[j]) {
+                survivedPclass[j] = [];
+              }
+              survivedPclass[j].push(array[i]);
+            }
+          }
+        }
+        if (array[i][1] === "0") {
+          if (!survived[0]) {
+            survived[0] = [];
+          }
+          survived[0].push(array[i]);
+          for (let j = 1; j <= 3; j++) {
+            if (array[i][2] === j.toString()) {
+              if (!notSurvivedPclass[j]) {
+                notSurvivedPclass[j] = [];
+              }
+              notSurvivedPclass[j].push(array[i]);
+            }
+          }
+        }
+      }
+      console.log(survivedPclass);
       this.state.source._source.localdata = array;
       this.state.source.dataBind();
 
       this.setState({
-        records: array
+        records: array,
+        survived: survived,
+        survivedPclass: survivedPclass,
+        notSurvivedPclass
       });
-    });
-    RecordDataService.retrieveRecordsSurvived(1).then(response => {
-      let array = [];
-      for (let i = 0; i < response.data.length; i++) {
-        array.push(Object.values(response.data[i]));
-      }
-      this.setState({
-        survivedRecords: array
-      });
+      console.log("After All");
       console.log(this.state);
     });
+
     /* return RecordDataService.retrieveAllRecords().then(response => {
       let array = [];
       for (let i = 0; i < response.data.length; i++) {
