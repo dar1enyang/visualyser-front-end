@@ -195,54 +195,6 @@ class Grid extends Component {
         }
       });
     }
-    /*
-    let notSurvived = this.state.survived[0].length;
-    let survived = this.state.survived[1].length;
-
-     this.setState({
-      pieChartOption: {
-        title: {
-          text: "Filter by Survived"
-        },
-        chart: {
-          type: "pie"
-        },
-        series: [
-          {
-            data: [
-              { name: "Survived", y: survived },
-              { name: "Not Survived", y: notSurvived }
-            ]
-          }
-        ],
-        plotOptions: {
-          pie: {
-            datalabels: {
-              fomrat: "{point.name}"
-            }
-          }
-        }
-      },
-      barChartOption: {
-        title: {
-          text: "Filter by Survived"
-        },
-        chart: {
-          type: "bar"
-        },
-        xAxis: {
-          categories: ["Survived", "Not Survived"]
-        },
-        series: [
-          {
-            data: [
-              { name: "Survived", y: survived },
-              { name: "Not Survived", y: notSurvived }
-            ]
-          }
-        ]
-      }
-    }); */
   }
   updateSurvivedSeries() {
     // The chart is updated only with new options.
