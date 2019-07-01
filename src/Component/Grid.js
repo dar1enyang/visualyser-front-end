@@ -146,10 +146,60 @@ class Grid extends Component {
     /* this.loadRecords().then(res => {}); */
   }
   loadCharts() {
+    if (this.state.survived[0] && this.state.survived[1]) {
+      let notSurvived = this.state.survived[0].length;
+      let survived = this.state.survived[1].length;
+
+      this.setState({
+        pieChartOption: {
+          title: {
+            text: "Filter by Survived"
+          },
+          chart: {
+            type: "pie"
+          },
+          series: [
+            {
+              data: [
+                { name: "Survived", y: survived },
+                { name: "Not Survived", y: notSurvived }
+              ]
+            }
+          ],
+          plotOptions: {
+            pie: {
+              datalabels: {
+                fomrat: "{point.name}"
+              }
+            }
+          }
+        },
+        barChartOption: {
+          title: {
+            text: "Filter by Survived"
+          },
+          chart: {
+            type: "bar"
+          },
+          xAxis: {
+            categories: ["Survived", "Not Survived"]
+          },
+          series: [
+            {
+              data: [
+                { name: "Survived", y: survived },
+                { name: "Not Survived", y: notSurvived }
+              ]
+            }
+          ]
+        }
+      });
+    }
+    /*
     let notSurvived = this.state.survived[0].length;
     let survived = this.state.survived[1].length;
 
-    this.setState({
+     this.setState({
       pieChartOption: {
         title: {
           text: "Filter by Survived"
@@ -192,102 +242,114 @@ class Grid extends Component {
           }
         ]
       }
-    });
+    }); */
   }
   updateSurvivedSeries() {
     // The chart is updated only with new options.
-    let sPClassOne = this.state.survivedPclass[1].length;
-    let sPClassTwo = this.state.survivedPclass[2].length;
-    let sPClassThree = this.state.survivedPclass[3].length;
-    let records = this.state.survivedPclass[1].concat(
-      this.state.survivedPclass[2],
+    if (
+      this.state.survivedPclass[1] &&
+      this.state.survivedPclass[2] &&
       this.state.survivedPclass[3]
-    );
-    this.state.source._source.localdata = records;
-    this.state.source.dataBind();
-    this.setState({
-      message: "Now filter by Survived",
-      pieChartOption: {
-        title: {
-          text: "Survived & Filter by PClass"
+    ) {
+      let sPClassOne = this.state.survivedPclass[1].length;
+      let sPClassTwo = this.state.survivedPclass[2].length;
+      let sPClassThree = this.state.survivedPclass[3].length;
+      let records = this.state.survivedPclass[1].concat(
+        this.state.survivedPclass[2],
+        this.state.survivedPclass[3]
+      );
+      this.state.source._source.localdata = records;
+      this.state.source.dataBind();
+      this.setState({
+        message: "Now filter by Survived",
+        pieChartOption: {
+          title: {
+            text: "Survived & Filter by PClass"
+          },
+          chart: {
+            type: "pie"
+          },
+          series: [
+            {
+              data: [
+                { name: "Class 1", y: sPClassOne },
+                { name: "Class 2", y: sPClassTwo },
+                {
+                  name: "Class 3",
+                  y: sPClassThree
+                }
+              ]
+            }
+          ]
         },
-        chart: {
-          type: "pie"
-        },
-        series: [
-          {
-            data: [
-              { name: "Class 1", y: sPClassOne },
-              { name: "Class 2", y: sPClassTwo },
-              {
-                name: "Class 3",
-                y: sPClassThree
-              }
-            ]
-          }
-        ]
-      },
-      barChartOption: {
-        title: {
-          text: "Survived & Filter by PClass"
-        },
-        chart: {
-          type: "bar"
-        },
-        xAxis: {
-          categories: ["Class 1", "Class 2", "Class 3"]
-        },
-        series: [{ data: [sPClassOne, sPClassTwo, sPClassThree] }]
-      }
-    });
+        barChartOption: {
+          title: {
+            text: "Survived & Filter by PClass"
+          },
+          chart: {
+            type: "bar"
+          },
+          xAxis: {
+            categories: ["Class 1", "Class 2", "Class 3"]
+          },
+          series: [{ data: [sPClassOne, sPClassTwo, sPClassThree] }]
+        }
+      });
+    }
   }
   updateNotSurvivedSeries() {
     // The chart is updated only with new options.
-    let sPClassOne = this.state.notSurvivedPclass[1].length;
-    let sPClassTwo = this.state.notSurvivedPclass[2].length;
-    let sPClassThree = this.state.notSurvivedPclass[3].length;
-    let records = this.state.notSurvivedPclass[1].concat(
-      this.state.notSurvivedPclass[2],
+    if (
+      this.state.notSurvivedPclass[1] &&
+      this.state.notSurvivedPclass[2] &&
       this.state.notSurvivedPclass[3]
-    );
-    this.state.source._source.localdata = records;
-    this.state.source.dataBind();
+    ) {
+      let sPClassOne = this.state.notSurvivedPclass[1].length;
+      let sPClassTwo = this.state.notSurvivedPclass[2].length;
+      let sPClassThree = this.state.notSurvivedPclass[3].length;
+      let records = this.state.notSurvivedPclass[1].concat(
+        this.state.notSurvivedPclass[2],
+        this.state.notSurvivedPclass[3]
+      );
+      this.state.source._source.localdata = records;
+      this.state.source.dataBind();
 
-    this.setState({
-      message: "Now filter by Not Survived",
-      pieChartOption: {
-        title: {
-          text: "Not Survived & Filter by PClass"
+      this.setState({
+        message: "Now filter by Not Survived",
+        pieChartOption: {
+          title: {
+            text: "Not Survived & Filter by PClass"
+          },
+          chart: {
+            type: "pie"
+          },
+          series: [
+            {
+              data: [
+                { name: "Class 1", y: sPClassOne },
+                { name: "Class 2", y: sPClassTwo },
+                {
+                  name: "Class 3",
+                  y: sPClassThree
+                }
+              ]
+            }
+          ]
         },
-        chart: {
-          type: "pie"
-        },
-        series: [
-          {
-            data: [
-              { name: "Class 1", y: sPClassOne },
-              { name: "Class 2", y: sPClassTwo },
-              {
-                name: "Class 3",
-                y: sPClassThree
-              }
-            ]
-          }
-        ]
-      },
-      barChartOption: {
-        title: {
-          text: "Not Survived & Filter by PClass"
-        },
-        chart: {
-          type: "bar"
-        },
-        xAxis: {
-          categories: ["Class 1", "Class 2", "Class 3"]
-        },
-        series: [{ data: [sPClassOne, sPClassTwo, sPClassThree] }]
-      }
-    });
+        barChartOption: {
+          title: {
+            text: "Not Survived & Filter by PClass"
+          },
+          chart: {
+            type: "bar"
+          },
+          xAxis: {
+            categories: ["Class 1", "Class 2", "Class 3"]
+          },
+          series: [{ data: [sPClassOne, sPClassTwo, sPClassThree] }]
+        }
+      });
+    }
   }
   render() {
     const { pieChartOption, barChartOption, message } = this.state;
